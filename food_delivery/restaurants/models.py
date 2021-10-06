@@ -62,6 +62,7 @@ class Restaurant(models.Model):
     restaurant_avg_rating = models.FloatField()
     restaurant_rated_by_number = models.FloatField()
     cuisines = models.ManyToManyField(Cuisine)
+    photo = models.ImageField()
 
     def __str__(self):
         return f'{self.restaurant_name}'
