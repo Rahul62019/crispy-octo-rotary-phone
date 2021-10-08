@@ -4,25 +4,26 @@ from django.db import models
 class Cuisine(models.Model):
 
     CUISINE_CHOICES = [
-        ('Th','Thai'),
-        ('Ch','Chinese'),
-        ('Jap','Japanese'),
-        ('Ita','Italian'),
-        ('Mex','Mexican'),
+        ('Thai','Thai'),
+        ('Chinese','Chinese'),
+        ('Japanese','Japanese'),
+        ('Italian','Italian'),
+        ('Mexican','Mexican'),
         ('TexMex','Tex-Mex'),
-        ('Gr','Greek'),
-        ('Piz','Pizza'),
-        ('Bur','Burger'),
-        ('Fast','Fast-Food'),
-        ('Des','Desserts'),
-        ('Ind','Indian'),
-        ('Veg','Vegan'),
-        ('Br','Breakfast'),
-        ('San','Sandwiches'),
-        ('Gou','Gourmet')
+        ('Greek','Greek'),
+        ('Pizza','Pizza'),
+        ('Burger','Burger'),
+        ('Fast-Food','Fast-Food'),
+        ('Desserts','Desserts'),
+        ('Indian','Indian'),
+        ('Vegan','Vegan'),
+        ('Breakfast','Breakfast'),
+        ('Sandwiches','Sandwiches'),
+        ('Gourmet','Gourmet'),
+        ('Ice Cream','Ice Cream')
     ]
 
-    cuisine_name = models.CharField(max_length=6,choices=CUISINE_CHOICES)
+    cuisine_name = models.CharField(max_length=16,choices=CUISINE_CHOICES)
 
     def __str__(self):
         return f'{self.cuisine_name}'
@@ -63,24 +64,18 @@ class Restaurant(models.Model):
     restaurant_rated_by_number = models.FloatField()
     cuisines = models.ManyToManyField(Cuisine)
     photo = models.ImageField()
+    avg_cost_for2 = models.IntegerField()
 
     def __str__(self):
         return f'{self.restaurant_name}'
 
 class Address(models.Model):
 
-    COUNTRY_CHOICES = [
-        ('IND','India'),
-        ('CAN','Canada'),
-        ('USA','USA')
-    ]
-
     address1 = models.CharField(max_length=128)
     address2 = models.CharField(max_length=128)
     city = models.CharField(max_length=128)
     pin = models.CharField(max_length=128)
     state = models.CharField(max_length=128)
-    country = models.CharField(max_length=128,choices=COUNTRY_CHOICES)
     restaurant = models.ForeignKey(Restaurant,related_name="address",on_delete=models.CASCADE)
 
 class Dish(models.Model):

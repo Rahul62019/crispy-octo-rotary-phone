@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from food_delivery import settings #import this for getting the media root for images
+from django.conf.urls.static import static #Static for adding the files to urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('restaurants/',include("restaurants.urls"))
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #Add this line to render the images

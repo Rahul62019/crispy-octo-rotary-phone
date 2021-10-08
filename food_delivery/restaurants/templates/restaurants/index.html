@@ -1,5 +1,15 @@
 {% extends "restaurants/layout.html" %}
-
+{% load static %}
 {% block body %}
+<link rel="stylesheet" type="text/css" href=" {% static 'restaurants/restaurant.css' %} ">
 <h1>Some Heading</h1>
+{% for restaurant in restaurants %}
+<div class="restaurant">
+    <div class="restaurant-img"><img src="{{restaurant.photo.url}}"></div>
+    <div class="restaurant-info">
+        <div class="restaurant-name"><p class="name">{{restaurant.restaurant_name}}</p></div>
+        <div class="restaurant-cuisine">{% for cuisine in restaurant.cuisines.all %}<p class="cuisine">{{cuisine}}</p>{% endfor %}</div>
+    </div>
+</div>
+{% endfor %}
 {% endblock %}
